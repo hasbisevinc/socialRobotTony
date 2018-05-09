@@ -89,47 +89,25 @@ public class RegularWord {
 
     private void responseAction(final String action, String speech) {
         Log.d(TAG, "responseAction: action:"+action+" speech:"+speech);
-        TTS.getInstance(activity).speek(speech);
+        RobotApi.speak(activity, speech);
         Toast.makeText(activity, speech, Toast.LENGTH_LONG).show();
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (action.contains("sad")) {
                     lastAction = "sad";
-                } else if (action.contains("happy")) {
+                }if (action.contains("shock")) {
+                    lastAction = "shock";
+                }if (action.contains("shock2")) {
+                    lastAction = "shock2";
+                }if (action.contains("think")) {
+                    lastAction = "think";
+                }if (action.contains("angry")) {
+                    lastAction = "angry";
+                }else if (action.contains("happy")) {
                     lastAction = "fun";
                     try {
-                        BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(130));
-                        BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(36));
-                        BluetoothConnection.getInstance().sendPacket("SD "+String.valueOf(1000));
-
-                        BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(130));
-                        BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(36));
-                        BluetoothConnection.getInstance().sendPacket("SD "+String.valueOf(1000));
-
-                        BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(130));
-                        BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(36));
-                        BluetoothConnection.getInstance().sendPacket("SD "+String.valueOf(1000));
-
-                        BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(130));
-                        BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(130));
-                        BluetoothConnection.getInstance().sendPacket("SD "+String.valueOf(1000));
-
-                        //  BluetoothConnection.getInstance().sendPacket("MD 5000");
-
-                        BluetoothConnection.getInstance().sendPacket("LF 200");
-                        BluetoothConnection.getInstance().sendPacket("RF 200");
-                        BluetoothConnection.getInstance().sendPacket("MD "+String.valueOf(250));
-                        BluetoothConnection.getInstance().sendPacket("RS");
-                        BluetoothConnection.getInstance().sendPacket("LS");
-                        BluetoothConnection.getInstance().sendPacket("LB "+String.valueOf(150));
-                        BluetoothConnection.getInstance().sendPacket("RB "+String.valueOf(150));
-                        BluetoothConnection.getInstance().sendPacket("MD "+String.valueOf(250));
-                        BluetoothConnection.getInstance().sendPacket("RS");
-                        BluetoothConnection.getInstance().sendPacket("LS");
-
-                        BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(45));
-                        BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(125));
+                        RobotApi.doHappy();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

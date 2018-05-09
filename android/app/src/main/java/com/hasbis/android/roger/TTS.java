@@ -53,6 +53,14 @@ public class TTS {
                             Roger.canvas.status = 0;
                         } else if (lastAction.equals("sad")) {
                             Roger.canvas.status = 3;
+                        } else if (lastAction.equals("shock")) {
+                            Roger.canvas.status = 2;
+                        } else if (lastAction.equals("shock2")) {
+                            Roger.canvas.status = 2;
+                        } else if (lastAction.equals("angry")) {
+                            Roger.canvas.status = 6;
+                        } else if (lastAction.equals("think")) {
+                            Roger.canvas.status = 4;
                         } else if (lastAction.equals("fun")) {
                             Roger.canvas.status = 5;
                         }
