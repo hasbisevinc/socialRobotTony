@@ -203,7 +203,7 @@ public class RegularWord {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer e64cc139f59147a6b41bd0a2a890cd2b");
+                params.put("Authorization", "Bearer 425d38dd76924fdaa1022a3e9430d578");
 
                 return params;
             }
