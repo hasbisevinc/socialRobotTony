@@ -1,6 +1,7 @@
 package com.hasbis.android.roger;
 
 import android.app.Activity;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
  * Created by hasbis on 09.05.2018.
  */
 public class RobotApi {
+    static String TAG = "RobotApi";
     public static void speak(Activity activity, String speech) {
         TTS.getInstance(activity).speek(speech);
     }
@@ -44,5 +46,21 @@ public class RobotApi {
 
         BluetoothConnection.getInstance().sendPacket("RA "+String.valueOf(45));
         BluetoothConnection.getInstance().sendPacket("LA "+String.valueOf(125));
+    }
+
+    public static void upLeftArm() {
+        Log.d(TAG, "upLeftArm: ");
+    }
+
+    public static void downLeftArm() {
+        Log.d(TAG, "downLeftArm: ");
+    }
+
+    public static void upRightArm() {
+        Log.d(TAG, "upRightArm: ");
+    }
+
+    public static void downRightArm() {
+        Log.d(TAG, "downRightArm: ");
     }
 }

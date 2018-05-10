@@ -34,6 +34,7 @@ public class STTEngine  implements RecognitionListener {
         EMTY,
         HOTWORD,
         REGULARWORD,
+        SLEEP,
         SPEAKING
     }
 
@@ -200,7 +201,7 @@ public class STTEngine  implements RecognitionListener {
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        Log.i(TAG, "onRmsChanged: " + rmsdB);
+        //Log.i(TAG, "onRmsChanged: " + rmsdB);
     }
 
     public String getErrorText(int errorCode) {

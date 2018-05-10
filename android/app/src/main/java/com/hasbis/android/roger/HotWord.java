@@ -70,6 +70,14 @@ public class HotWord {
                         }
                     }
 
+                    while (sttEngine.master == STTEngine.MASTER.SLEEP) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     sttEngine.lock.lock();
                     if (sttEngine.getCurrentState() == STTEngine.STATES.IDLE) {
                         sttEngine.setSpeechInterface(new STTEngine.SpeechInterface() {

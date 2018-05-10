@@ -1,6 +1,7 @@
 package com.hasbis.android.roger;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -57,7 +58,30 @@ public class RegularWord {
             public void onComplete(String str) {
                 Log.d(TAG, "onComplete: bitttiiiiiiiiiiiiiiii:"+str);
                 sttEngine.master = STTEngine.MASTER.SPEAKING;
-                sendSentence(str);
+                if (InteractionData.state == InteractionData.STATES.CHAT) {
+                    sendSentence(str);
+                } else if (InteractionData.state == InteractionData.STATES.QUESTIONS) {
+                    boolean answer = false;
+                    if (str.toLowerCase().contains("true") || str.toLowerCase().contains("right") || str.toLowerCase().contains("through")) {
+                        answer = true;
+                    }
+                    String speech = "";
+                    if (InteractionData.answers[InteractionData.questionIndex -1] == answer ) {
+                        speech = "That is right";
+                        InteractionData.correct ++;
+                    } else {
+                        speech = "Sorry, it is not right";
+                    }
+                    if (InteractionData.questionIndex == 5) {
+                        speech += "... You have "+InteractionData.correct+" point";
+                        RobotApi.speak(activity, speech);
+                        InteractionData.questionIndex ++;
+                        return;
+                    }
+                    speech += "Next question:" +InteractionData.questions[InteractionData.questionIndex];
+                    RobotApi.speak(activity, speech);
+                    InteractionData.questionIndex ++;
+                }
 
             }
 
