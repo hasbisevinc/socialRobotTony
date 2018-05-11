@@ -92,4 +92,5 @@ public class InteractionData {
             true,
             true
     };
+
 }
