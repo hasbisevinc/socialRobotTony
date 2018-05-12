@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.concurrent.TimeUnit;
 /**
  * Created by hasbis on 19.02.2018.
  */
@@ -59,27 +60,46 @@ public class RegularWord {
                 Log.d(TAG, "onComplete: bitttiiiiiiiiiiiiiiii:"+str);
                 sttEngine.master = STTEngine.MASTER.SPEAKING;
                 if (InteractionData.state == InteractionData.STATES.CHAT) {
+                    InteractionData.chatIndex++;
                     sendSentence(str);
                 } else if (InteractionData.state == InteractionData.STATES.QUESTIONS) {
+                    boolean correctlyAnswered = false;
                     boolean answer = false;
-                    if (str.toLowerCase().contains("true") || str.toLowerCase().contains("right") || str.toLowerCase().contains("through")) {
+                    if (    str.toLowerCase().contains("true") ||
+                            str.toLowerCase().contains("right") ||
+                            str.toLowerCase().contains("through") ||
+                            str.toLowerCase().contains("yes") ||
+                            str.toLowerCase().contains("correct")) {
                         answer = true;
                     }
                     String speech = "";
                     if (InteractionData.answers[InteractionData.questionIndex -1] == answer ) {
-                        speech = "That is right";
+                        speech = "That is right. ";
+                        correctlyAnswered = true;
                         InteractionData.correct ++;
                     } else {
-                        speech = "Sorry, it is not right";
+                        speech = "Sorry, it is wrong. ";
                     }
-                    if (InteractionData.questionIndex == 5) {
-                        speech += "... You have "+InteractionData.correct+" point";
+                    if (InteractionData.questionIndex == InteractionData.questions.length) {
+                        speech += "... You have "+InteractionData.correct+" points";
                         RobotApi.speak(activity, speech);
-                        InteractionData.questionIndex ++;
                         return;
                     }
                     speech += "Next question:" +InteractionData.questions[InteractionData.questionIndex];
                     RobotApi.speak(activity, speech);
+                    if(correctlyAnswered){
+                        try {
+                            RobotApi.doHappy();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        try {
+                            RobotApi.doSad();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     InteractionData.questionIndex ++;
                 }
 
@@ -120,14 +140,22 @@ public class RegularWord {
             public void run() {
                 if (action.contains("sad")) {
                     lastAction = "sad";
-                }if (action.contains("shock")) {
+                    try {
+                        RobotApi.doSad();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if (action.contains("shock")) {
                     lastAction = "shock";
-                }if (action.contains("shock2")) {
-                    lastAction = "shock2";
-                }if (action.contains("think")) {
+                }else if (action.contains("think")) {
                     lastAction = "think";
-                }if (action.contains("angry")) {
+                }else if (action.contains("angry")) {
                     lastAction = "angry";
+                    try {
+                        RobotApi.doAngry();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }else if (action.contains("happy")) {
                     lastAction = "fun";
                     try {
@@ -138,6 +166,16 @@ public class RegularWord {
                 } else {
                     Roger.canvas.status = 0;
                     lastAction = "";
+                }
+                if(action.contains("Step2") || InteractionData.chatIndex > 3) {
+                    InteractionData.state = InteractionData.STATES.MOVEMENT;
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    RobotApi.speak(activity, "Lets move together");
+                    Toast.makeText(activity, "Lets move together", Toast.LENGTH_LONG).show();
                 }
             }
         });

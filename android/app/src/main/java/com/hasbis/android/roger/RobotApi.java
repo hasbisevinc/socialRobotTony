@@ -63,4 +63,16 @@ public class RobotApi {
     public static void downRightArm() {
         Log.d(TAG, "downRightArm: ");
     }
+
+    public static void moveForward() {
+        Log.d(TAG, "moveForward: ");
+    }
+
+    public static void moveBackward() {
+        Log.d(TAG, "moveBackward: ");
+    }
+
+    public static void doAngry() throws IOException { Log.d(TAG, "moveBackward: "); }
+
+    public static void doSad() throws IOException { Log.d(TAG, "moveBackward: "); }
 }

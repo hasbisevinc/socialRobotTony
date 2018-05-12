@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hasbis on 19.02.2018.
@@ -70,60 +71,81 @@ public class TTS {
                     }
                 });
                 if (InteractionData.state == InteractionData.STATES.CHAT) {
-                    InteractionData.chatIndex ++;
-                    if (InteractionData.chatIndex > 3) {
-                        InteractionData.state = InteractionData.STATES.MOVEMENT;
-                        STTEngine.getInstance().master = STTEngine.MASTER.SPEAKING;
-                        RobotApi.speak(activity, "... ,, Up your left arm");
-                    } else {
-                        STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
-                    }
-                    Log.d(TAG, "onDone: chatindex:"+InteractionData.chatIndex);
+                    STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
                 } else if (InteractionData.state == InteractionData.STATES.MOVEMENT) {
                     //STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
-                    if (InteractionData.movementIndex == 0) {
+                    STTEngine.getInstance().master = STTEngine.MASTER.SPEAKING;
+                    if (InteractionData.movementIndex == 0) { // Let’s raise your left hand.
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
+                        InteractionData.movementIndex++;
                         RobotApi.upLeftArm();
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.downLeftArm();
-                                RobotApi.speak(activity, "Up your right arm");
+                                RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                             }
-                        }, 1000);
-                    } else if (InteractionData.movementIndex == 1) {
+                        }, 3000);
+                    } else if (InteractionData.movementIndex == 1) { // Let’s raise your right hand.
                         RobotApi.upRightArm();
+                        InteractionData.movementIndex++;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.downRightArm();
-                                RobotApi.speak(activity, "Up your both arm");
+                                RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                             }
                         }, 1000);
-                    } else if (InteractionData.movementIndex == 2) {
+                    }  else if (InteractionData.movementIndex == 2) { // Let’s raise your both hands.
                         RobotApi.upLeftArm();
                         RobotApi.upLeftArm();
+                        InteractionData.movementIndex++;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.downRightArm();
                                 RobotApi.downLeftArm();
-                                RobotApi.speak(activity, "you are great");
+                                RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
+                            }
+                        }, 3000);
+                    } else if (InteractionData.movementIndex == 3) { // Let’s move back.
+                        RobotApi.moveBackward();
+                        InteractionData.movementIndex++;
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                RobotApi.moveForward();
+                                RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
+                            }
+                        }, 3000);
+                    } else if (InteractionData.movementIndex == 4) { // Let’s go ahead.
+                        RobotApi.moveForward();
+                        InteractionData.movementIndex++;
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                RobotApi.moveBackward();
+                                RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                                 InteractionData.state = InteractionData.STATES.QUESTIONS;
                             }
-                        }, 1000);
+                        }, 3000);
                     } else {
                         InteractionData.state = InteractionData.STATES.QUESTIONS;
                     }
-                    InteractionData.movementIndex ++;
                 } else if (InteractionData.state == InteractionData.STATES.QUESTIONS) {
                     if (InteractionData.questionIndex > 0) {
                         STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
                     }
                     if (InteractionData.questionIndex == 0) {
-                        RobotApi.speak(activity, "I will ask question, just say true or false. "+InteractionData.questions[InteractionData.questionIndex]);
-                        InteractionData.questionIndex ++;
+                        RobotApi.speak(activity, InteractionData.questions[InteractionData.questionIndex]);
+                        InteractionData.questionIndex++;
                     }
-                    if (InteractionData.questionIndex == 6) {
+                    if (InteractionData.questionIndex == InteractionData.questions.length) {
                         AudioManager amanager=(AudioManager)activity.getSystemService(Context.AUDIO_SERVICE);
 
                         amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false);

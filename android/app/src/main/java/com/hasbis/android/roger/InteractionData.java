@@ -20,8 +20,7 @@ public class InteractionData {
     public static String[] movementSessionWords = {
             "Let’s raise your left hand.",
             "Let’s raise your right hand.",
-            "Let’s down your left hand.",
-            "Let’s down your right hand.",
+            "Let’s raise your both hands.",
             "Let’s move back.",
             "Let’s go ahead.",
             "We complete all steps so we can be good friends. That’s why i have questions for you."
