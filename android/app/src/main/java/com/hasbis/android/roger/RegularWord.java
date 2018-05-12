@@ -133,8 +133,10 @@ public class RegularWord {
 
     private void responseAction(final String action, String speech) {
         Log.d(TAG, "responseAction: action:"+action+" speech:"+speech);
-        RobotApi.speak(activity, speech);
-        Toast.makeText(activity, speech, Toast.LENGTH_LONG).show();
+        if(!(action.contains("Step3") || action.contains("Step2"))){
+            RobotApi.speak(activity, speech);
+            Toast.makeText(activity, speech, Toast.LENGTH_LONG).show();
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -175,7 +177,15 @@ public class RegularWord {
                         e.printStackTrace();
                     }
                     RobotApi.speak(activity, "Lets move together");
-                    Toast.makeText(activity, "Lets move together", Toast.LENGTH_LONG).show();
+                }
+                if(action.contains("Step3")) {
+                    InteractionData.state = InteractionData.STATES.QUESTIONS;
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    RobotApi.speak(activity, "we can be good friends. That’s why i have questions for you");
                 }
             }
         });
