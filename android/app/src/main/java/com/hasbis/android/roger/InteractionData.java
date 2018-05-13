@@ -16,6 +16,7 @@ public class InteractionData {
     public static int questionIndex = 0;
     public static int correct = 0;
     public static int wrong = 0;
+    public static int totalQuestionWillbeAsked = 4;
     public static boolean closeTheApp = false;
 
     public static String[] movementSessionWords = {
@@ -28,8 +29,6 @@ public class InteractionData {
     };
 
     public static String[] questions = {
-            "Are you a boy?",
-            "Are you 6 years old?",
             "Is brocoli pink color?",
             "Is it sunny in winter?",
             "Do we get wool from sheep?",
@@ -61,8 +60,6 @@ public class InteractionData {
     };
 
     public static boolean[] answers = {
-            true,
-            true,
             false,
             false,
             true,

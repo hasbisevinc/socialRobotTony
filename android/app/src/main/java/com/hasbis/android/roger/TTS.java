@@ -23,6 +23,7 @@ public class TTS {
     private static TTS instance = null;
     private Activity activity = null;
     TextToSpeech tts;
+    boolean freeze = false;
 
     private TTS(final Activity activity) {
         setContext(activity);
@@ -70,9 +71,14 @@ public class TTS {
                         }
                     }
                 });
+
                 if (InteractionData.state == InteractionData.STATES.CHAT) {
                     STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
                 } else if (InteractionData.state == InteractionData.STATES.MOVEMENT) {
+                    if (freeze) {
+                        Log.d(TAG, "onDone: freeze");
+                        return;
+                    }
                     //STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
                     STTEngine.getInstance().master = STTEngine.MASTER.SPEAKING;
                     if (InteractionData.movementIndex == 0) { // Let’s raise your left hand.
@@ -84,30 +90,36 @@ public class TTS {
                         RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                         InteractionData.movementIndex++;
                         RobotApi.upLeftArm();
+                        freeze = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.downLeftArm();
+                                freeze = false;
                                 RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                             }
                         }, 3000);
                     } else if (InteractionData.movementIndex == 1) { // Let’s raise your right hand.
                         RobotApi.upRightArm();
                         InteractionData.movementIndex++;
+                        freeze = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.downRightArm();
+                                freeze = false;
                                 RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                             }
-                        }, 1000);
+                        }, 3000);
                     }  else if (InteractionData.movementIndex == 2) { // Let’s raise your both hands.
                         RobotApi.upLeftArm();
-                        RobotApi.upLeftArm();
+                        RobotApi.upRightArm();
                         InteractionData.movementIndex++;
+                        freeze = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
+                                freeze = false;
                                 RobotApi.downRightArm();
                                 RobotApi.downLeftArm();
                                 RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);

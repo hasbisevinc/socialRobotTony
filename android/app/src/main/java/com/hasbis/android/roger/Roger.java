@@ -128,6 +128,9 @@ public class Roger extends AppCompatActivity {
             case R.id.test:
                 startActivity(new Intent(Roger.this, Test.class));
                 break;
+            case R.id.test2:
+                startActivity(new Intent(Roger.this, Test2.class));
+                break;
         }
         return true;
     }

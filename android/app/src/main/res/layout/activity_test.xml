@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Left Servo"
-        android:id="@+id/leftservo"
+        android:id="@+id/leftdown"
         android:layout_below="@+id/backward"
         android:layout_alignParentStart="true"
         android:layout_marginTop="70dp" />
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/leftservoseek"
-        android:layout_alignBottom="@+id/leftservo"
+        android:layout_alignBottom="@+id/leftdown"
         android:layout_alignEnd="@+id/right"
         android:layout_alignStart="@+id/backward"
         android:max="180"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Right Servo"
-        android:id="@+id/rightservo"
+        android:id="@+id/rightdown"
         android:layout_below="@+id/leftservoseek"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rightservoseek"
-        android:layout_alignBottom="@+id/rightservo"
+        android:layout_alignBottom="@+id/rightdown"
         android:layout_alignStart="@+id/leftservoseek"
         android:layout_alignEnd="@+id/leftservoseek"
         android:max="180"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:text="/"
         android:id="@+id/leftbackward"
-        android:layout_above="@+id/leftservo"
+        android:layout_above="@+id/leftdown"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:text="\"
         android:id="@+id/rightbackward"
-        android:layout_above="@+id/leftservo"
+        android:layout_above="@+id/leftdown"
         android:layout_alignStart="@+id/right" />
 
     <Button

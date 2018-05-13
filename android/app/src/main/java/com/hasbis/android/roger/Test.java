@@ -178,8 +178,8 @@ public class Test extends AppCompatActivity {
         });
 
 
-        Button rightservo = (Button) findViewById(R.id.rightservo);
-        Button leftservo = (Button) findViewById(R.id.leftservo);
+        Button rightservo = (Button) findViewById(R.id.rightdown);
+        Button leftservo = (Button) findViewById(R.id.leftdown);
         final SeekBar leftservoseek = (SeekBar) findViewById(R.id.leftservoseek);
         final SeekBar rightservoseek = (SeekBar) findViewById(R.id.rightservoseek);
 

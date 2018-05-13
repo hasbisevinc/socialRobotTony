@@ -92,6 +92,16 @@ public class HotWord {
                                         str.toLowerCase().contains("toni") ||
                                         str.toLowerCase().contains("pony") ||
                                         str.toLowerCase().contains("poni") ||
+                                        str.toLowerCase().contains("hony") ||
+                                        str.toLowerCase().contains("honny") ||
+                                        str.toLowerCase().contains("funny") ||
+                                        str.toLowerCase().contains("funy") ||
+                                        str.toLowerCase().contains("colony") ||
+                                        str.toLowerCase().contains("call") ||
+                                        str.toLowerCase().contains("sonny")
+                                        || str.toLowerCase().contains("coni") || str.toLowerCase().contains("cony") || str.toLowerCase().contains("tommy")
+                                        || str.toLowerCase().contains("tomy") || str.toLowerCase().contains("coni") || str.toLowerCase().contains("kony")
+                                        || str.toLowerCase().contains("conny") ||
                                         str.toLowerCase().contains("donnie")) {
                                     sttEngine.setSpeechInterface(null);
                                     sttEngine.cancel();

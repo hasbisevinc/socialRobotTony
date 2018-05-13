@@ -80,7 +80,7 @@ public class RegularWord {
                     } else {
                         speech = "Sorry, it is wrong. ";
                     }
-                    if (InteractionData.questionIndex == InteractionData.questions.length) {
+                    if (InteractionData.questionIndex == InteractionData.totalQuestionWillbeAsked) {
                         speech += "... You have "+InteractionData.correct+" points...";
                         speech += "Now you will listen a song. Then please try to say the song again by yourself.";
                         InteractionData.closeTheApp = true;
