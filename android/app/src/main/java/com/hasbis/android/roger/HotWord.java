@@ -88,7 +88,11 @@ public class HotWord {
 
                             @Override
                             public void onPartialResults(String str) {
-                                if (str.toLowerCase().contains("tony") || str.toLowerCase().contains("toni") ) {
+                                if (    str.toLowerCase().contains("tony") ||
+                                        str.toLowerCase().contains("toni") ||
+                                        str.toLowerCase().contains("pony") ||
+                                        str.toLowerCase().contains("poni") ||
+                                        str.toLowerCase().contains("donnie")) {
                                     sttEngine.setSpeechInterface(null);
                                     sttEngine.cancel();
                                     sttEngine.master = STTEngine.MASTER.REGULARWORD;

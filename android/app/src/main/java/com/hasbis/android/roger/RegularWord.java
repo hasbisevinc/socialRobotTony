@@ -81,7 +81,9 @@ public class RegularWord {
                         speech = "Sorry, it is wrong. ";
                     }
                     if (InteractionData.questionIndex == InteractionData.questions.length) {
-                        speech += "... You have "+InteractionData.correct+" points";
+                        speech += "... You have "+InteractionData.correct+" points...";
+                        speech += "Now you will listen a song. Then please try to say the song again by yourself.";
+                        InteractionData.closeTheApp = true;
                         RobotApi.speak(activity, speech);
                         return;
                     }
@@ -100,7 +102,7 @@ public class RegularWord {
                             e.printStackTrace();
                         }
                     }
-                    InteractionData.questionIndex ++;
+                    InteractionData.questionIndex++;
                 }
 
             }

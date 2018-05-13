@@ -16,6 +16,7 @@ public class InteractionData {
     public static int questionIndex = 0;
     public static int correct = 0;
     public static int wrong = 0;
+    public static boolean closeTheApp = false;
 
     public static String[] movementSessionWords = {
             "Let’s raise your left hand.",

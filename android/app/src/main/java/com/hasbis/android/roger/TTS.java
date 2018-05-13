@@ -141,11 +141,8 @@ public class TTS {
                     if (InteractionData.questionIndex > 0) {
                         STTEngine.getInstance().master = STTEngine.MASTER.EMTY;
                     }
-                    if (InteractionData.questionIndex == 0) {
-                        RobotApi.speak(activity, InteractionData.questions[InteractionData.questionIndex]);
-                        InteractionData.questionIndex++;
-                    }
-                    if (InteractionData.questionIndex == InteractionData.questions.length) {
+
+                    if (InteractionData.closeTheApp == true) {
                         AudioManager amanager=(AudioManager)activity.getSystemService(Context.AUDIO_SERVICE);
 
                         amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false);
@@ -156,7 +153,12 @@ public class TTS {
 
                         Intent LaunchIntent = activity.getPackageManager().getLaunchIntentForPackage("com.nana.Androidtest");
                         activity.startActivity(LaunchIntent);
-                        activity.finish();
+                        System.exit(0);
+                        //activity.finish();
+                    }
+                    if (InteractionData.questionIndex == 0){
+                        RobotApi.speak(activity, InteractionData.questions[InteractionData.questionIndex]);
+                        InteractionData.questionIndex++;
                     }
                 }
             }
