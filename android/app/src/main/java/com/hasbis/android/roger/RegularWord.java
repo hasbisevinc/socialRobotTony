@@ -84,7 +84,7 @@ public class RegularWord {
                     }
                     if (InteractionData.questionIndex == InteractionData.totalQuestionWillbeAsked) {
                         speech += "... You have "+InteractionData.correct+" points...";
-                        speech += "Now you will listen a song. Then please try to say the song again by yourself.";
+                        speech += "Now you can show photos to Nina robot to get information.";
                         InteractionData.closeTheApp = true;
                         RobotApi.speak(activity, speech);
                         return;
