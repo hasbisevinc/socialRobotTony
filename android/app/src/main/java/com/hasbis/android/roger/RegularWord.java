@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 /**
  * Created by hasbis on 19.02.2018.
@@ -88,7 +90,13 @@ public class RegularWord {
                         return;
                     }
                     speech += "Next question:" +InteractionData.questions[InteractionData.questionIndex];
-                    RobotApi.speak(activity, speech);
+                    final String finalSpeech = speech;
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            RobotApi.speak(activity, finalSpeech);
+                        }
+                    }, 1000);
                     if(correctlyAnswered){
                         try {
                             RobotApi.doHappy();

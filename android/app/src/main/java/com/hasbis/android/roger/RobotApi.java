@@ -36,9 +36,9 @@ public class RobotApi {
 
         //  BluetoothConnection.getInstance().sendPacket("MD 5000");
 
-        BluetoothConnection.getInstance().sendPacket("LF 200");
-        BluetoothConnection.getInstance().sendPacket("RF 200");
-        BluetoothConnection.getInstance().sendPacket("MD "+String.valueOf(250));
+        BluetoothConnection.getInstance().sendPacket("LF 120");
+        BluetoothConnection.getInstance().sendPacket("RF 70");
+        BluetoothConnection.getInstance().sendPacket("MD "+String.valueOf(500));
         BluetoothConnection.getInstance().sendPacket("RS");
         BluetoothConnection.getInstance().sendPacket("LS");
         BluetoothConnection.getInstance().sendPacket("LB "+String.valueOf(150));
@@ -90,8 +90,8 @@ public class RobotApi {
     public static void moveForward() {
         Log.d(TAG, "moveForward: ");
         try {
-            BluetoothConnection.getInstance().sendPacket("LF 200");
-            BluetoothConnection.getInstance().sendPacket("RF 200");
+            BluetoothConnection.getInstance().sendPacket("LF 120");
+            BluetoothConnection.getInstance().sendPacket("RF 70");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,7 +100,7 @@ public class RobotApi {
             public void run() {
                 stop();
             }
-        }, 250);
+        }, 500);
     }
 
     public static void stop() {
@@ -115,8 +115,8 @@ public class RobotApi {
     public static void moveBackward() {
         Log.d(TAG, "moveBackward: ");
         try {
-            BluetoothConnection.getInstance().sendPacket("LB 200");
-            BluetoothConnection.getInstance().sendPacket("RB 200");
+            BluetoothConnection.getInstance().sendPacket("LB 150");
+            BluetoothConnection.getInstance().sendPacket("RB 120");
         } catch (IOException e) {
             e.printStackTrace();
         }

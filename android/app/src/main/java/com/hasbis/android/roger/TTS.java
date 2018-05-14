@@ -128,9 +128,11 @@ public class TTS {
                     } else if (InteractionData.movementIndex == 3) { // Let’s move back.
                         RobotApi.moveBackward();
                         InteractionData.movementIndex++;
+                        freeze = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
+                                freeze = false;
                                 RobotApi.moveForward();
                                 RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                             }
@@ -138,12 +140,14 @@ public class TTS {
                     } else if (InteractionData.movementIndex == 4) { // Let’s go ahead.
                         RobotApi.moveForward();
                         InteractionData.movementIndex++;
+                        freeze = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 RobotApi.moveBackward();
                                 RobotApi.speak(activity, InteractionData.movementSessionWords[InteractionData.movementIndex]);
                                 InteractionData.state = InteractionData.STATES.QUESTIONS;
+                                freeze = false;
                             }
                         }, 3000);
                     } else {
