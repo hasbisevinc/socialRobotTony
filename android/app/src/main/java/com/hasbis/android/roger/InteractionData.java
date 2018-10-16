@@ -10,7 +10,14 @@ public class InteractionData {
         QUESTIONS
     }
 
+    enum TEST {
+        FULL,
+        MOVEMENT,
+        QUESTION
+    }
+
     public static STATES state = STATES.CHAT;
+    public static TEST test = TEST.FULL;
     public static int chatIndex = 0;
     public static int movementIndex = 0;
     public static int questionIndex = 0;

@@ -26,6 +26,34 @@
         android:layout_alignLeft="@+id/listView"
         android:layout_alignStart="@+id/listView" />
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="102dp">
+
+        <RadioButton
+            android:id="@+id/normal_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Full session (talk+movement+question)" />
+
+        <RadioButton
+            android:id="@+id/only_movement_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movement + question session" />
+
+        <RadioButton
+            android:id="@+id/only_question_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Only question session" />
+    </RadioGroup>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

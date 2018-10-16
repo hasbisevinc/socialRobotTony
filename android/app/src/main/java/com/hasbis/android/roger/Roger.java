@@ -53,8 +53,13 @@ public class Roger extends AppCompatActivity {
         HotWord hotWord = HotWord.getInstance();
         hotWord.setContext(this);
         hotWord.start();
+        if (InteractionData.test == InteractionData.TEST.FULL) {
 
-        //sendSentence("nasilsin");
+        } else if (InteractionData.test == InteractionData.TEST.MOVEMENT) {
+            InteractionData.state = InteractionData.STATES.MOVEMENT;
+        } else if (InteractionData.test == InteractionData.TEST.QUESTION) {
+            InteractionData.state = InteractionData.STATES.QUESTIONS;
+        }
     }
 
     public static void setMic(boolean vis) {

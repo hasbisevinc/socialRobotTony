@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -45,6 +46,24 @@ public class SelectDevice extends AppCompatActivity {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(turnOn, 0);
         }
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.normal_session:
+                        InteractionData.test = InteractionData.TEST.FULL;
+                        break;
+                    case R.id.only_movement_session:
+                        InteractionData.test = InteractionData.TEST.MOVEMENT;
+                        break;
+                    case R.id.only_question_session:
+                        InteractionData.test = InteractionData.TEST.QUESTION;
+                        break;
+                }
+            }
+        });
     }
 
     public void list() {

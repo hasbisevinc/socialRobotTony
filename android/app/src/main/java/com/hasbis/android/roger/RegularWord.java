@@ -65,6 +65,11 @@ public class RegularWord {
                     InteractionData.chatIndex++;
                     sendSentence(str);
                 } else if (InteractionData.state == InteractionData.STATES.QUESTIONS) {
+                    if (InteractionData.questionIndex == 0){
+                        RobotApi.speak(activity, "Hey,, I have some questions for you...,");
+                        return;
+                    }
+
                     boolean correctlyAnswered = false;
                     boolean answer = false;
                     if (    str.toLowerCase().contains("true") ||
@@ -111,6 +116,8 @@ public class RegularWord {
                         }
                     }
                     InteractionData.questionIndex++;
+                } else if(InteractionData.state == InteractionData.STATES.MOVEMENT) {
+                    RobotApi.speak(activity, "Lets move together");
                 }
 
             }
